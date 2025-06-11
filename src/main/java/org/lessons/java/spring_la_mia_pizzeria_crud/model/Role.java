@@ -1,9 +1,13 @@
 package org.lessons.java.spring_la_mia_pizzeria_crud.model;
 
+import java.util.Set;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -17,6 +21,8 @@ public class Role {
     @NotBlank(message = "A name cannot be blank")
     private String username;
 
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+    private Set<User> users;
 
     public Integer getId() {
         return this.id;
@@ -33,5 +39,15 @@ public class Role {
     public void setUsername(String username) {
         this.username = username;
     }
+
+
+    public Set<User> getUsers() {
+        return this.users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
 
 }
