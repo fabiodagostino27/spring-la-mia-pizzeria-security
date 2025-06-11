@@ -1,0 +1,25 @@
+<th:block th:replace="~{fragments/fragments :: thymeleaf}" />
+
+<body class="bg-light">
+    <div th:replace="~{fragments/fragments :: navbar}"></div>
+    <main class="container py-5 text-center">
+        <div class="p-5">
+            <img th:src="@{/img/logo.jpg}" class="img-fluid rounded-circle shadow-sm mb-4" style="max-width: 200px;"
+                alt="Immagine della pizzeria">
+            <h1 class="display-4 text-primary mb-3">Benvenuto alla mia pizzeria!</h1>
+            <p class="lead text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis sit
+                recusandae rerum maxime incidunt officiis, quibusdam quisquam corrupti obcaecati at nam. Perferendis
+                consectetur cum asperiores autem maiores nemo, repudiandae pariatur. Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Cumque, natus nostrum atque iure rem provident fugit repellendus porro
+                enim similique quas accusamus necessitatibus tenetur dicta sit nam quam. Corrupti, labore. Lorem ipsum
+                dolor sit amet, consectetur adipisicing elit. Nihil perferendis ipsum suscipit deserunt obcaecati
+                aperiam provident repellat, libero ipsam illo doloremque quos quo eos asperiores modi similique nam
+                facilis voluptatem?</p>
+            <a th:href="@{/pizzas}" class="btn btn-primary btn-lg mt-3">Scopri il nostro menu</a>
+        </div>
+    </main>
+
+    <th:block th:replace="~{fragments/fragments :: footer}" />
+</body>
+
+</html>

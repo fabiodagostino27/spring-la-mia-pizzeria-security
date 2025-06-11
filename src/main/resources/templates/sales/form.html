@@ -1,0 +1,52 @@
+<th:block th:replace="~{fragments/fragments :: thymeleaf}" />
+
+<body>
+    <nav th:replace="~{fragments/fragments :: navbar}" />
+    <main class="container mb-4">
+        <h1>Aggiungi un'offerta a: [[${sale.getPizza().getName()}]]</h1>
+        <form id="sale-form" th:object="${sale}" th:action="${edit} ? @{/sales/edit/{id}(id=${sale.id})} : @{/sales/create}" th:method="POST" class="my-3">
+            <input type="hidden" th:field="*{pizza}">
+
+            <div class="mb-3">
+                <label class="form-label" for="title">Titolo</label>
+                <input type="text" class="form-control" id="title" th:field="*{title}" th:errorClass="is-invalid">
+                <div th:if="${#fields.hasErrors('title')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="startingDate">Data di inizio</label>
+                <input type="date" class="form-control" id="startingDate" th:field="*{startingDate}" th:errorClass="is-invalid"
+                    min="1">
+                <div th:if="${#fields.hasErrors('startingDate')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('startingDate')}" th:text="${err}"></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label" for="endingDate">Data di fine</label>
+                <input type="date" class="form-control" id="endingDate" th:field="*{endingDate}" th:errorClass="is-invalid"
+                    min="1">
+                <div th:if="${#fields.hasErrors('endingDate')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('endingDate')}" th:text="${err}"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <button class="btn btn-warning" type="reset">Reset</button>
+                <button class="btn btn-primary" type="submit">Invio</button>
+            </div>
+        </form>
+    </main>
+
+    <th:block th:replace="~{fragments/fragments :: footer}" />
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<th:block th:replace="~{fragments/fragments :: thymeleaf}" />
+
+<body>
+    <nav th:replace="~{fragments/fragments :: navbar}" />
+    <main class="container mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1>Le nostre pizze:</h1>
+            <a class="btn btn-primary" th:href="@{/pizzas/create}">Aggiungi una pizza</a>
+        </div>
+        <h3>Ricerca:</h3>
+        <form th:action="@{/pizzas/search}" class="d-flex my-3">
+            <input class="form-control rounded-end-0" id="name" type="text" name="name" placeholder="Cerca per nome"
+                th:value="${name}">
+            <button class="btn btn-primary rounded-start-0">Cerca</button>
+        </form>
+        <div class="row gap-3 justify-content-center">
+            <div class="card col-5 col-md-4 col-lg-3 col-xl-2 p-0" style="height: 400px;" th:each="pizza : ${pizzas}">
+                <figure class="w-100" style="height: 200px; overflow: hidden;">
+                    <img th:src="${pizza.imageUrl}" class="img-fluid object-fit-cover h-100 w-100" alt="${pizza.name}">
+                </figure>
+                <div class="card-body h-50 d-flex flex-column justify-content-between">
+                    <h5 class="card-title">[[${pizza.name}]]</h5>
+                    <p class="card-text" style="-webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; display: -webkit-box;">[[${pizza.description}]]</p>
+                    <div>
+                        <a th:href="@{/pizzas/{id}(id=${pizza.id})}" class="btn btn-primary">Vedi in dettaglio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <th:block th:replace="~{fragments/fragments :: footer}" />
+</body>
+
+</html>

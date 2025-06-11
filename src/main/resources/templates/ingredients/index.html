@@ -1,0 +1,67 @@
+<th:block th:replace="~{fragments/fragments :: thymeleaf}" />
+
+<body>
+    <nav th:replace="~{fragments/fragments :: navbar}" />
+    <main class="container mb-4">
+        <div class="d-flex align-items-center gap-3">
+            <h1>I nostri ingredienti</h1>
+            <a th:href="@{/ingredients/create}" class="btn btn-primary">Aggiungi ingrediente</a>
+        </div>
+        <h2 th:if="${ingredients.size() == 0}">Nessun ingrediente presente</h2>
+        <table th:unless="${ingredients.size() == 0}" class="table">
+            <thead>
+                <th>Nome</th>
+                <th>Descrizione</th>
+                <th>Pizze associate</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr th:each="ingredient : ${ingredients}">
+                    <td>[[${ingredient.name}]]</td>
+                    <td th:if="${ingredient.description.length > 0}">[[${ingredient.description}]]</td>
+                    <td th:unless="${ingredient.description.length > 0}">Nessuna descrizione per questo ingrediente</td>
+                    <td>[[${ingredient.getPizzas()}]]</td>
+                    <td><a class="btn btn-primary" th:href="@{/ingredients/edit/{id}(id=${ingredient.id})}">Modifica</a>
+                    </td>
+                    <td>
+                        <div>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                Elimina
+                            </button>
+
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminazione</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>La pizza verrà definitivamente eliminata.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Annulla</button>
+                                            <form action="#" th:action="@{/ingredients/delete/{id}(id=${ingredient.id})}"
+                                                th:method="post">
+                                                <button class="btn btn-danger" type="submit">Conferma</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <th:block th:replace="~{fragments/fragments :: footer}" />
+        <script th:src="@{/webjars/bootstrap/5.3.5/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>

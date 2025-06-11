@@ -1,0 +1,40 @@
+<th:block th:replace="~{fragments/fragments :: thymeleaf}" />
+
+<body>
+    <nav th:replace="~{fragments/fragments :: navbar}" />
+    <main class="container mb-4">
+        <h1 th:unless="${edit}">Crea un ingrediente</h1>
+        <h1 th:if="${edit}">Modifica: [[${ingredient.name}]]</h1>
+        <form id="sale-form" th:object="${ingredient}"
+            th:action="${edit} ? @{/ingredients/edit/{id}(id=${ingredient.id})} : @{/ingredients/create}" th:method="POST" class="my-3">
+            <div class="mb-3">
+                <label class="form-label" for="name">Nome</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}" th:errorClass="is-invalid">
+                <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="description">Descrizione</label>
+                <textarea class="form-control" id="description" th:field="*{description}" th:errorClass="is-invalid" />
+                <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
+                    <ul>
+                        <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <button class="btn btn-warning" type="reset">Reset</button>
+                <button class="btn btn-primary" type="submit">Invio</button>
+            </div>
+        </form>
+    </main>
+
+    <th:block th:replace="~{fragments/fragments :: footer}" />
+</body>
+
+</html>
