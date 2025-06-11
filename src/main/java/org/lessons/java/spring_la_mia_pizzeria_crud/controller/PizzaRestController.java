@@ -51,7 +51,7 @@ public class PizzaRestController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Pizza> update(@PathVariable Integer id, @Valid @RequestBody Pizza pizza) {
-        if (service.findById(id)) {
+        if (service.findById(id).isEmpty()) {
             return new ResponseEntity<Pizza>(HttpStatus.NOT_FOUND);
         }
 
