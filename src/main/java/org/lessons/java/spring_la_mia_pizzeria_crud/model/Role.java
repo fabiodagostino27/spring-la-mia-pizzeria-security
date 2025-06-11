@@ -19,7 +19,7 @@ public class Role {
     private Integer id;
 
     @NotBlank(message = "A name cannot be blank")
-    private String username;
+    private String name;
 
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     private Set<User> users;
@@ -32,14 +32,13 @@ public class Role {
         this.id = id;
     }
 
-    public String getUsername() {
-        return this.username;
+    public String getName() {
+        return this.name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
-
 
     public Set<User> getUsers() {
         return this.users;
